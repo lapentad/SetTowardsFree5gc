@@ -1,5 +1,5 @@
 # SetTowardsFree5gc
-Scripts to help you deploy Free5GC in a single cluster on a Ubuntu machine
+Scripts to help you deploy Free5GC in a single cluster on a Ubuntu machine using **Kind** and **Helm**, based on [Orange-OpenSource/towards5gs helm charts](https://github.com/Orange-OpenSource/towards5gs-helm/tree/main/charts).
 
 This bash script performs various checks and installations related to the Kubernetes environment setup for deploying the free5GC project.
 

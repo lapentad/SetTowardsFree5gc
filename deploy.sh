@@ -1,10 +1,11 @@
 #!/bin/bash
 
 checkKernel() {
-	required_version="5.4.0"
+	required_version="5.0.0"
 	current_version=$(uname -r)
 	if [[ $current_version < $required_version ]]; then
 		echo "Kernel version is less than $required_version. Exiting."
+		exit 1
 	else
 		echo "Kernel version $current_version is compatible."
 	fi
@@ -22,10 +23,8 @@ checkDocker() {
 		sudo apt-get update -y
 		sudo apt-get install docker-ce docker-ce-cli containerd.io -y
 		sudo usermod -aG docker $USER
-		
 	else
 		echo "Docker is installed."
-		
 	fi
 }
 
@@ -36,10 +35,8 @@ checkHelm() {
 		chmod 700 ./get_helm.sh
 		./get_helm.sh
 		rm ./get_helm.sh
-		
 	else
 		echo "Helm is installed."
-		
 	fi
 }
 
@@ -50,11 +47,10 @@ checkKubectl() {
         echo "kubectl is not installed. Installing it..."
 		curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 		sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-        
     fi
     if [[ "$(printf '%s\n' "$required_version" "$kubectl_version" | sort -V | head -n1)" != "$required_version" ]]; then
         echo "kubectl version is less than $required_version or not installed."
-        echo "Replacing kubectl version with updated one"
+        echo "Replacing kubectl version with 1.26.4"
 		curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.26.4/2023-05-11/bin/linux/amd64/kubectl
 		chmod +x ./kubectl
 		mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH
