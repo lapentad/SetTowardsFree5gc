@@ -7,8 +7,8 @@ This bash script performs various checks and installations related to the Kubern
 
 To use the script, follow these steps:
 
-1. Make the script executable: `chmod +x deploy.sh`.
-2. Run the script: `./deploy.sh`.
+1. Make the script executable and run it: `chmod +x deploy.sh && ./deploy.sh`
+2. [simulator](#Simulator)
 
 ## Prerequisites
 
@@ -22,8 +22,8 @@ Before running the script, ensure the following prerequisites are met:
 
 1. Download the script to your local machine.
 2. Open a terminal and navigate to the directory where the script is located.
-3. Make the script executable if needed: `chmod +x script.sh`.
-4. Run the script: `./script.sh`.
+3. Make the script executable if needed: `chmod +x deploy.sh`.
+4. Run the script: `./deploy.sh`.
 
 ## Functionality
 
@@ -43,6 +43,16 @@ The script performs the following tasks:
 12. **createPV**: Creates a Persistent Volume in the Kind cluster.
 13. **getContainerIDandAddeth1**: Retrieves the Docker ID of the container named `kind-control-plane` and adds an `eth1` interface to it.
 14. **deployfree5gc**: Deploys the free5GC project to the Kubernetes cluster using Helm.
+
+<a id="simulator"></a>
+## Simulator
+To run the simulator you need to have a subscriber, to do so you can follow the insctuctions in the `./webUi.sh`
+
+1. Make sure all the scripts are runnable `chmod +x webUi.sh` etc etc
+2. `./webUi.sh`
+3. Login in the web ui and make a new Subscriber with default values.
+4. `./deployEURANSIM.sh`
+5. Wait until the EU pod of the simulator is running and use the interface uesimtun0 of that pod to ping anything. 
 
 ## Note
 
