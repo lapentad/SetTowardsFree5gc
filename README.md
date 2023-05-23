@@ -8,7 +8,7 @@ This bash script performs various checks and installations related to the Kubern
 To use the script, follow these steps:
 
 1. Make the script executable and run it: `chmod +x deploy.sh && ./deploy.sh`
-2. [simulator](#Simulator)
+2. [Simulator](#Simulator)
 
 ## Prerequisites
 
