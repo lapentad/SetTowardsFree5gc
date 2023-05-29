@@ -87,10 +87,8 @@ installGo() {
 		echo 'export PATH=$PATH:$GOPATH/bin:$GOROOT/bin' >> ~/.bashrc
 		echo 'export GO111MODULE=auto' >> ~/.bashrc
 		source ~/.bashrc
-		
 	else
 		echo "Go is installed."
-		
 	fi
 }
 
@@ -100,10 +98,8 @@ installMongo() {
 		sudo apt -y update
 		sudo apt -y install mongodb wget git
 		sudo systemctl start mongodb
-		
 	else
 		echo "Mongo is installed."
-		
 	fi
 	
 }
@@ -112,10 +108,8 @@ installKind() {
 	if ! command -v kind &> /dev/null; then
 		echo "Kind is not installed. Installing it..."
 		go install sigs.k8s.io/kind@v0.19.0
-		
 	else
 		echo "Kind is installed."
-		
 	fi
 	
 }
@@ -151,8 +145,14 @@ installMultus() {
 }
 
 createPV() {
-	mkdir ~/kubedata
-	cat <<EOF | kubectl apply -f -
+    directory="~/kubedata"
+    if [ -d "$directory" ]; then
+        rm -rf "${directory:?}/"*
+    else
+        mkdir -p "$directory"
+    fi
+    
+    cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: PersistentVolume
 metadata:
