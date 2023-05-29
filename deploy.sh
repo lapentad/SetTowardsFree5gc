@@ -121,6 +121,25 @@ linuxNetwork() {
     sudo systemctl stop ufw
 }
 
+linuxPromiscuous(){
+    cat <<EOF | sudo tee /etc/systemd/system/promiscuous-mode.service
+[Unit]
+Description=Enable promiscuous mode on ens3 interface
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/sbin/ip link set ens3 promisc on
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+    sudo systemctl daemon-reload
+    sudo systemctl enable promiscuous-mode.service
+    sudo systemctl start promiscuous-mode.service
+}
+
 createKindCluster() {
     #export KIND_EXPERIMENTAL_DOCKER_NETWORK=enabled
     cat <<EOF | kind create cluster --config -
