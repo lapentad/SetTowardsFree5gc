@@ -60,10 +60,18 @@ checkKubectl() {
 }
 
 installCNIPlugins() {
-	curl -fsSL http://bit.ly/install_pkg | PKG_COMMANDS_LIST="kind,docker,kubectl" PKG=cni-plugins bash
-	git clone https://github.com/free5gc/gtp5g.git && cd ./gtp5g
-	make
-	sudo make install
+    directory="/opt/containernetworking/plugins"
+    file="/etc/modules"
+    search_string="gtp5g"
+
+    if [ -n "$(ls -A "$directory")" ] && grep -q "$search_string" "$file"; then
+        echo "$directory is not empty, and gtp5g drivers are installed."
+    else
+        curl -fsSL http://bit.ly/install_pkg | PKG_COMMANDS_LIST="kind,docker,kubectl" PKG=cni-plugins bash
+        git clone https://github.com/free5gc/gtp5g.git && cd ./gtp5g
+        make
+        sudo make install
+    fi
 }
 
 installGo() {
@@ -112,8 +120,15 @@ installKind() {
 	
 }
 
+linuxNetwork() {
+    sudo sysctl -w net.ipv4.ip_forward=1
+    sudo iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE
+    sudo iptables -A FORWARD -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --set-mss 1400
+    sudo systemctl stop ufw
+}
+
 createKindCluster() {
-    export KIND_EXPERIMENTAL_DOCKER_NETWORK=enabled
+    #export KIND_EXPERIMENTAL_DOCKER_NETWORK=enabled
     cat <<EOF | kind create cluster --config -
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
@@ -196,6 +211,7 @@ checkKubectl
 installCNIPlugins
 installGo
 installKind
+linuxNetwork
 installMongo
 createKindCluster
 installFlannel
