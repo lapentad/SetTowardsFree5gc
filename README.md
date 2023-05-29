@@ -52,7 +52,7 @@ To run the simulator you need to have a subscriber, to do so you can follow the 
 1. Make sure all the scripts are runnable `chmod +x webUi.sh` etc etc
 2. `./webUi.sh`
 3. Login in the web ui and make a new Subscriber with default values.
-4. `./deployEURANSIM.sh`
+4. `./simulator.sh`
 5. Wait until the EU pod of the simulator is running and use the interface uesimtun0 of that pod to ping anything. 
 
 ## Note
