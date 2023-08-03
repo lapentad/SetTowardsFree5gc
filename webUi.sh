@@ -5,3 +5,4 @@ echo "3. Optional:if you are in a VM without gui then log into the vm mapping th
 echo "ssh -L localhost:5000:localhost:5000 <USER>@<IP>"
 kubectl port-forward --namespace free5gc svc/webui-service 5000:5000
  
+#curl -d "@${TESTDIR}/007-subscriber.json" -H 'Token: admin' -H 'Content-Type: application/json' "http://${ip}:${port}/api/subscriber/imsi-208930000000003/20893"
