@@ -82,6 +82,7 @@ installCNIPlugins() {
     if [ -n "$(ls -A "$directory")" ] && grep -q "$search_string" "$file"; then
         echo "$directory is not empty, and gtp5g drivers are installed."
     else
+        mkdir $directory
 	    GET_VER=$(curl -L -s https://github.com/containernetworking/plugins/releases/latest | grep '^\s*v' | sed 's/ //g') && \
 		  curl -Lo ./cni-plugins.tgz https://github.com/containernetworking/plugins/releases/download/$GET_VER/cni-plugins-linux-amd64-$GET_VER.tgz
 		sudo tar -zxvf cni-plugins.tgz --directory $directory
