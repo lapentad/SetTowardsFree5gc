@@ -23,13 +23,13 @@ installMultus() {
 }
 
 createPV() {
-    directory="~/kubedata"
+    directory=~/kubedata
     if [ -d "$directory" ]; then
         rm -rf "${directory:?}/"*
     else
         mkdir -p "$directory"
     fi
-    
+
     cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: PersistentVolume
@@ -65,10 +65,10 @@ getContainerIDandAddeth1() {
         exit 1
     else
         echo "Docker ID of '$container_name': $docker_id"
-        export DOCKER_ID="$docker_id"
+        docker exec $docker_id ip link add eth1 type dummy
+        docker exec $docker_id ip addr add 1.1.1.1/24 dev eth1
+        docker exec $docker_id ip link set eth1 up
     fi
-	docker exec $DOCKER_ID ip link set eth1 up
-	
 }
 
 deployfree5gc() {
