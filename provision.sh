@@ -39,7 +39,9 @@ checkDocker() {
 		sudo usermod -aG docker $USER
 		newgrp docker
 	else
-		echo "Docker is installed."
+                sudo usermod -aG docker $USER
+		newgrp docker
+                echo "Docker is installed."
 	fi
 }
 
