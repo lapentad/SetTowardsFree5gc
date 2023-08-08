@@ -7,7 +7,8 @@ This bash script performs various checks and installations related to the Kubern
 
 To use the script, follow these steps:
 
-1. Make the script executable and run it: `chmod +x deploy.sh && ./deploy.sh`
+1. `./provision.sh`
+2. `./helm.sh`
 2. `watch kubectl get po -A` CTRL+C when all the pods are RUNNING
 3. [Simulator](#Simulator)
 
@@ -23,12 +24,11 @@ Before running the script, ensure the following prerequisites are met:
 
 1. Download the script to your local machine.
 2. Open a terminal and navigate to the directory where the script is located.
-3. Make the script executable if needed: `chmod +x deploy.sh`.
-4. Run the script: `./deploy.sh`.
+3. Run the script: `./provision.sh` for the first run and then `./helm.sh` .
 
 ## Functionality
 
-The script performs the following tasks:
+The script performs the following tasks: (OLD)
 
 1. **checkKernel**: Checks the kernel version and exits if it is less than the required version.
 2. **checkDocker**: Installs Docker if not already installed.
