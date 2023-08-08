@@ -7,7 +7,7 @@ This bash script performs various checks and installations related to the Kubern
 
 To use the script, follow these steps:
 
-1. `./provision.sh`
+1. `sudo ./provision.sh`
 2. `./helm.sh`
 2. `watch kubectl get po -A` CTRL+C when all the pods are RUNNING
 3. [Simulator](#Simulator)
@@ -24,7 +24,7 @@ Before running the script, ensure the following prerequisites are met:
 
 1. Download the script to your local machine.
 2. Open a terminal and navigate to the directory where the script is located.
-3. Run the script: `./provision.sh` for the first run and then `./helm.sh` .
+3. Run the script: `sudo ./provision.sh` for the first run and then `./helm.sh` .
 
 ## Functionality
 
