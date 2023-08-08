@@ -121,7 +121,7 @@ installMongo() {
 		sudo systemctl status mongod
 	else
 		echo "Mongo is installed."
-	fi	
+	fi
 }
 
 installKind() {
@@ -137,7 +137,7 @@ installKind() {
 }
 
 checkNetwork() {
-	NIC=ip route | grep default | awk '{print $5}'
+        NIC=$(ip route | grep default | awk '{print $5}')
 	sudo sysctl -w net.ipv4.ip_forward=1
 	sudo iptables -t nat -A POSTROUTING -o $NIC -j MASQUERADE
 	sudo systemctl stop ufw
