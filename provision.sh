@@ -11,7 +11,7 @@ sudolessUser() {
 
 checkBasics() {
 	sudo apt update
-	sudo apt install -y wget git
+	sudo apt install -y wget git curl
 }
 
 checkKernel() {
