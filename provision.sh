@@ -28,7 +28,6 @@ checkKernel() {
 checkDocker() {
 	if ! command -v docker &> /dev/null; then
 		echo "Docker is not installed. Installing it..."
-		sudo apt-get update -y
 		curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 		sudo add-apt-repository \
 		   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
@@ -77,7 +76,7 @@ checkKubectl() {
 }
 
 installCNIPlugins() {
-    directory="/opt/containernetworking/plugins"
+    directory="/opt/containernetworking/plugins/"
     file="/etc/modules"
     search_string="gtp5g"
 
