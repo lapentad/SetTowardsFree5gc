@@ -119,8 +119,8 @@ installMongo() {
 		echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu $(lsb_release -cs)/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb.list
 		sudo apt update
 		sudo apt install -y mongodb-org
-		sudo systemctl start mongodb
-		sudo systemctl status mongod
+		sudo systemctl start mongod
+		sudo systemctl enable mongod
 	else
 		echo "Mongo is installed."
 	fi
