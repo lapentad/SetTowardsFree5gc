@@ -129,8 +129,7 @@ installMongo() {
 installKind() {
 	if ! command -v kind &> /dev/null; then
 		echo "Kind is not installed. Installing it..."
-		GET_VER=$(curl -L -s https://github.com/kubernetes-sigs/kind/releases/latest | grep '^\s*v' | sed 's/ //g') && \
-		  curl -Lo /usr/local/kind https://kind.sigs.k8s.io/dl/$GET_VER/kind-linux-amd64
+		GET_VER=$(curl -L -s https://github.com/kubernetes-sigs/kind/releases/latest | grep '^\s*v' | sed 's/ //g') && sudo curl -Lo /usr/local/kind https://kind.sigs.k8s.io/dl/$GET_VER/kind-linux-amd64
 		sudo install -o root -g root -m 0755 /usr/local/kind /usr/local/bin/kind
 		kind version
 	else
