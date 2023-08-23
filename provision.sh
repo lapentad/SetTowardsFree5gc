@@ -63,6 +63,10 @@ checkKubectl() {
         echo "kubectl is not installed. Installing it..."
 		curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 		sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+  		source <(kubectl completion bash)
+		echo "source <(kubectl completion bash)" >> ~/.bashrc
+  		alias k=kubectl
+		complete -o default -F __start_kubectl k
     fi
     if [[ "$(printf '%s\n' "$required_version" "$kubectl_version" | sort -V | head -n1)" != "$required_version" ]]; then
         echo "kubectl version is less than $required_version or not installed."
