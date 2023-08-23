@@ -1,6 +1,6 @@
 #!/bin/bash
 createKindCluster() {
-    #export KIND_EXPERIMENTAL_DOCKER_NETWORK=enabled
+    #export KIND_EXPERIMENTAL_DOCKER_NETWORK=bridge
     cat <<EOF | kind create cluster --config -
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
